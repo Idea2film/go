@@ -1,424 +1,257 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Мой мир</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to bottom, #f4cdd5, #fff2d6, #e3caff);
-      color: #333;
-    }
-
-    header {
-      background-color: #ec407a;
-      color: white;
-      padding: 20px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    header h1 {
-      font-size: 2rem;
-      letter-spacing: 1px;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 20px;
-      font-weight: 500;
-      transition: opacity 0.3s ease;
-    }
-
-    nav a:hover {
-      opacity: 0.8;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 80px 20px 60px;
-      position: relative;
-    }
-
-    .hero h2 {
-      font-size: 3rem;
-      color: #5e2b99;
-      margin-bottom: 20px;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      max-width: 700px;
-      margin: 0 auto 30px;
-      color: #444;
-    }
-
-    .hero button {
-      background-color: #ffeb3b;
-      border: none;
-      color: #333;
-      font-size: 1.1rem;
-      padding: 12px 30px;
-      border-radius: 30px;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease;
-    }
-
-    .hero button:hover {
-      transform: scale(1.05);
-    }
-
-    .hero .blob {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 150px;
-      height: 40px;
-      background-color: #ffe041;
-      border-radius: 50%;
-      filter: blur(20px);
-      opacity: 0.3;
-    }
-
-    .themes {
-      padding: 60px 20px;
-      background-color: white;
-    }
-
-    .themes h3 {
-      font-size: 2.2rem;
-      text-align: center;
-      margin-bottom: 40px;
-      color: #333;
-    }
-
-    .theme-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .theme-card {
-      border: 2px solid #eee;
-      padding: 20px;
-      border-radius: 12px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    .theme-card:hover {
-      transform: scale(1.03);
-      border-color: #ec407a;
-    }
-
-    .theme-card.selected {
-      border-color: #ec407a;
-      background-color: #fce4ec;
-    }
-
-    .theme-card img {
-      margin-top: 15px;
-      width: 100%;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-
-    .theme-card h4 {
-      font-size: 1.1rem;
-      margin-bottom: 10px;
-    }
-
-    .theme-card .selected-indicator {
-      color: green;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-
-    .features {
-      padding: 60px 20px;
-      background: linear-gradient(to right, #f3e5f5, #bbdefb);
-    }
-
-    .features h3 {
-      font-size: 2.2rem;
-      text-align: center;
-      margin-bottom: 40px;
-      color: #333;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .feature-item {
-      background-color: white;
-      padding: 25px;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
-    }
-
-    .feature-item:hover {
-      transform: translateY(-5px);
-    }
-
-    .feature-icon {
-      width: 60px;
-      height: 60px;
-      background-color: #f8bbd0;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 15px;
-    }
-
-    .feature-icon svg {
-      fill: #ec407a;
-      width: 30px;
-      height: 30px;
-    }
-
-    .feature-item h4 {
-      font-size: 1.2rem;
-      margin-bottom: 10px;
-    }
-
-    .contact {
-      padding: 60px 20px;
-      background-color: white;
-    }
-
-    .contact h3 {
-      font-size: 2.2rem;
-      text-align: center;
-      margin-bottom: 40px;
-      color: #333;
-    }
-
-    .contact-form {
-      max-width: 600px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .contact-form label {
-      font-weight: 500;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
-      resize: vertical;
-    }
-
-    .contact-form button {
-      background-color: #ec407a;
-      color: white;
-      border: none;
-      padding: 14px;
-      font-size: 1.1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      transition: background-color 0.3s ease;
-    }
-
-    .contact-form button:hover {
-      background-color: #d81b60;
-    }
-
-    footer {
-      background-color: #ec407a;
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
-
-    @media (max-width: 600px) {
-      .hero h2 {
-        font-size: 2rem;
-      }
-
-      .hero p {
-        font-size: 1rem;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <header>
-    <h1>🎉 Мой мир</h1>
-    <nav>
-          <a href="#">Удиви своим видео творчеством</a><br>
-          <a href="#">в Хайфе 24 мая в 12.00</a><br>
-      <a href="#">в книжном магазине "Маша и три медведя"</a>
-    </nav>
-  </header>
-
-  <section class="hero">
-      <p>Мечтаешь стать блогером или режиссёром?
-     </p>
-        <div class="blob"></div>
-    <h2>🎬 Сними свой крутой ролик и стань звездой!</h2>
-    <button>Не упусти свой шанс!</button>
-  </section>
-
-  <section class="themes">
-    <h3>Как принять участие в "Мой мир"?<br>Выбери одну из тем:</h3>
-    <div class="theme-grid">              
-      <div class="theme-card selected" onclick="selectTheme(this)">
-        <h4>🐾 Мой питомец</h4>
-      </div>
-      <div class="theme-card" onclick="selectTheme(this)">
-        <h4>🎮 Моя любимая игра</h4>
-              </div>
-      <div class="theme-card" onclick="selectTheme(this)">
-        <h4>✨ Моя мечта</h4>
-             </div>
-      <div class="theme-card" onclick="selectTheme(this)">
-        <h4>🎤 Мой герой или героиня</h4>
-            </div>
-      <div class="theme-card" onclick="selectTheme(this)">
-        <h4>👫 Мой друг</h4>
-              </div>
-     <div class="theme-card selected" onclick="selectTheme(this)">
-                <h4>🎨 Моё хобби</h4>
-              </div>
-              <div class="theme-card" onclick="selectTheme(this)">
-                <h4>📚 Моя любимая сказка</h4>
-                      </div>
-              <div class="theme-card" onclick="selectTheme(this)">
-                <h4>👨‍👩‍👧‍👦 Наш семейный бизнес</h4>
-                     </div>
-              <div class="theme-card" onclick="selectTheme(this)">
-                <h4>🤩 Просто расскажи о себе!</h4>
-                    </div>
-              <div class="theme-card" onclick="selectTheme(this)">
-                <h4>🥳 Тему выбирай сам (и не только эти)!</h4>
-                      </div>
-    </div>
-    <h3>Что делать дальше?</h3>
-    <h4>
-    1. Возьми телефон или планшет и сними короткое видео до 90 секунд.
-  <br>
-  (можешь смонтировать видео или снимать непрерывно, без монтажа - как тебе больше нравится!)
-  <br>
-    2. Готовое видео <a href="https://forms.gle/crb9sJ2CnBU9TrRq9">отправь организаторам</a> с 15 по 20 мая 2025 года.
-    <br>
-    3.	Приходи на показ отобранных нами видео
-    <br><iframe width="464" height="262" src="https://www.youtube.com/embed/9wePa_uaIro" title="Как качественно снимать видео на телефон. Уроки для детей." frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </h4> 
-  </section>
-
-  <section class="features">
-    <h3>Что тебя ждёт 24 мая в 12 часов в книжный магазин “Маша и три медведя”?</h3>
-
-    <div class="feature-grid">
-      <div class="feature-item">
-        <div class="feature-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><path d="M12 6v6l4 2"/></svg>
-        </div>
-        <h4>Кто может участвовать?</h4>
-        <p>👶 Дошкольники до 6 лет
-<br>
-          👦👧 Ребята от 7 до 10 лет
-          <br>
-          🧑‍🎤 Подростки от 11 до 17 лет</p>
-      </div>
-      <div class="feature-item">
-        <div class="feature-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        </div>
-      
-        <h4>🎬 Мастер-класс</h4>
-        <p>по видеосъёмке и монтажу от кинооператора Ильи Панфилова. 
-          <br>Тема: "Базовые навыки и лайфхаки видеосъёмки на смартфон". Начало в 12.30
-        <br>Стоимость: 40</p>
-      </div>
-      <div class="feature-item">
-        <div class="feature-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.73l1.02-1.02C11.9 10.5 11 9.18 11 7.5 11 5.02 13.02 3 15.5 3S20 5.02 20 7.5c0 2.52-2.02 4.5-4.5 4.5-1.7 0-3.16-.9-3.95-2.17z"/></svg>
-        </div>
-        <h4>🎬 Мастер-класс </h4>
-        <p>по актёрскому мастерству от актёра театра и кино Геннадия Фомина! 
-          <br>Тема: "Раскрепощение и раскованность во время съёмки". Начало в 13.15
-         <br> Стоимость: 40</p>
-      </div>
-    </div>
-    <h3>Показ фильмов</h3>
-    <div class="feature-item">
-      <div class="feature-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.73l1.02-1.02C11.9 10.5 11 9.18 11 7.5 11 5.02 13.02 3 15.5 3S20 5.02 20 7.5c0 2.52-2.02 4.5-4.5 4.5-1.7 0-3.16-.9-3.95-2.17z"/></svg>
-      </div>
-      <h4>🎥 Показ фильмов участников</h4>
-      <p>   Может быть, и твой фильм покажут на большом экране!
-        <br>Чтобы он был ещё круче, воспользуйся специальным шаблоном для монтажа.
-
-        <br>Такой шаблон помогает быстро добавить титры, музыку, переходы и сделать видео ярче - даже если ты никогда не монтировал раньше!
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сними своё кино - Детский киноинтенсив</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes rainbow {
+            0% { color: #ff0000; }
+            14% { color: #ff7f00; }
+            28% { color: #ffff00; }
+            42% { color: #00ff00; }
+            57% { color: #0000ff; }
+            71% { color: #4b0082; }
+            85% { color: #9400d3; }
+            100% { color: #ff0000; }
+        }
         
-        <br>Примеры онлайн-шаблонов для монтажа можно найти на сайтах Canva, Renderforest, CapCut или в бесплатных приложениях, например, Filmora, OpenShot, PowToon и других.        
-        <br>Просто выбери понравившийся шаблон, добавь свои видео и фото, напиши название фильма и свои имена, а в конце - год съёмки и символ конкурса. Всё просто!
-        <br>Начало просмотров в 14.00
-        <br>Стоимость: бесплатно</p>
-    </div>
-  </section>
-
-  <section class="contact">
-    <h4>Покажи всем свой мир - начни свой путь к успеху в мире видео!
-<br>
-      Если хочешь узнать больше о шаблонах монтажа - приходи на мастер-класс и  там всё очень просто и понятно расскажем даже для новичков
-      <br>
-      
-      Остались вопросы? Пиши и звони в вотсап и телеграмм по номеру +972533037301</h4>
-    <form class="contact-form">
-
-    </form>
-  </section>
-
-  <footer>
-    <p>© 2025 Мой мир. Все права защищены.</p>
-    <p>Создайте волшебство для вашего ребенка!</p>
-  </footer>
-
-  <script>
-    function selectTheme(card) {
-      document.querySelectorAll('.theme-card').forEach(c => c.classList.remove('selected'));
-      card.classList.add('selected');
-      const indicator = card.querySelector('.selected-indicator');
-      if (!indicator) {
-        const span = document.createElement('div');
-        span.className = 'selected-indicator';
-        span.textContent = '✓ Выбрана';
-        card.appendChild(span);
-      } else {
-        span.textContent = '✓ Выбрана';
-      }
-    }
-  </script>
-
-</body>
+        .rainbow-text {
+            animation: rainbow 5s linear infinite;
+        }
+        
+        .card {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+        
+        .card:hover {
+            transform: scale(1.05) rotateY(10deg);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .theme-item {
+            transition: all 0.3s ease;
+        }
+        
+        .theme-item:hover {
+            transform: translateY(-5px);
+            text-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .bounce {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-blue-50 to-purple-50 min-h-screen font-sans">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header with animation -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-bold rainbow-text mb-4">🎬 Сними своё кино!</h1>
+            <div class="flex justify-center">
+                <div class="bg-yellow-200 px-6 py-3 rounded-full shadow-lg pulse">
+                    <p class="text-xl md:text-2xl font-semibold text-purple-800">7 - 28 июня | 12:00 - 14:30</p>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Main content -->
+        <main>
+            <!-- Intro section -->
+            <section class="mb-16">
+                <div class="bg-white rounded-3xl p-8 shadow-xl card max-w-4xl mx-auto">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/3 mb-6 md:mb-0 flex justify-center">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2991/2991470.png" alt="Camera" class="w-48 h-48 floating">
+                        </div>
+                        <div class="md:w-2/3 md:pl-8">
+                            <h2 class="text-3xl font-bold text-purple-700 mb-4">Мечтаешь стать блогером или режиссёром?</h2>
+                            <p class="text-lg text-gray-700 mb-4">🎬 Сними свой фильм с актёром и оператором! <br>Не упусти свой шанс!</p>
+                            <p class="text-gray-600">В книжном магазине <span class="font-bold text-pink-600">"Маша и три медведя"</span> всего за 4 встречи ты научишься снимать настоящее кино!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Description section -->
+            <section class="mb-16">
+                <div class="bg-gradient-to-r from-purple-100 to-blue-100 rounded-3xl p-8 shadow-lg max-w-4xl mx-auto">
+                    <h2 class="text-2xl font-bold text-center text-purple-800 mb-6">Как это будет?</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-2xl shadow-md card">
+                            <div class="text-center mb-4">
+                                <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto">
+                                    <i class="fas fa-lightbulb text-blue-600 text-2xl"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-semibold text-center text-blue-700 mb-3">От идеи до сценария</h3>
+                            <p class="text-gray-700">Мы поможем превратить твою идею в интересный сценарий с завязкой, развитием и развязкой.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-md card">
+                            <div class="text-center mb-4">
+                                <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto">
+                                    <i class="fas fa-video text-green-600 text-2xl"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-semibold text-center text-green-700 mb-3">Профессиональные съёмки</h3>
+                            <p class="text-gray-700">Ты сможешь работать с настоящим оператором и актёрами, или сыграть главную роль сам!</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-md card">
+                            <div class="text-center mb-4">
+                                <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto">
+                                    <i class="fas fa-magic text-yellow-600 text-2xl"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-semibold text-center text-yellow-700 mb-3">Монтаж и озвучка</h3>
+                            <p class="text-gray-700">Мы научим монтировать видео и использовать нейросети для профессиональной озвучки.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-md card">
+                            <div class="text-center mb-4">
+                                <div class="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto">
+                                    <i class="fas fa-film text-red-600 text-2xl"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-semibold text-center text-red-700 mb-3">Готовый фильм</h3>
+                            <p class="text-gray-700">В результате ты получишь настоящее кино, которым сможешь гордиться и показать всем!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Themes section -->
+            <section class="mb-16">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-2xl font-bold text-center text-purple-800 mb-6">Выбери тему для своего фильма:</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                        <div class="bg-pink-100 p-4 rounded-xl text-center theme-item">
+                            <i class="fas fa-paw text-pink-600 text-3xl mb-2"></i>
+                            <p class="font-semibold text-pink-800">🐾 Мой питомец</p>
+                        </div>
+                        <div class="bg-blue-100 p-4 rounded-xl text-center theme-item">
+                            <i class="fas fa-gamepad text-blue-600 text-3xl mb-2"></i>
+                            <p class="font-semibold text-blue-800">🎮 Моя любимая игра</p>
+                        </div>
+                        <div class="bg-yellow-100 p-4 rounded-xl text-center theme-item">
+                            <i class="fas fa-star text-yellow-600 text-3xl mb-2"></i>
+                            <p class="font-semibold text-yellow-800">✨ Моя мечта</p>
+                        </div>
+                        <div class="bg-green-100 p-4 rounded-xl text-center theme-item">
+                            <i class="fas fa-user-astronaut text-green-600 text-3xl mb-2"></i>
+                            <p class="font-semibold text-green-800">🎤 Мой герой или героиня</p>
+                        </div>
+                        <div class="bg-purple-100 p-4 rounded-xl text-center theme-item">
+                            <i class="fas fa-users text-purple-600 text-3xl mb-2"></i>
+                            <p class="font-semibold text-purple-800">👫 Мой друг</p>
+                        </div>
+                        <div class="bg-red-100 p-4 rounded-xl text-center theme-item">
+                            <i class="fas fa-paint-brush text-red-600 text-3xl mb-2"></i>
+                            <p class="font-semibold text-red-800">🎨 Моё хобби</p>
+                        </div>
+                        <div class="bg-indigo-100 p-4 rounded-xl text-center theme-item">
+                            <i class="fas fa-book-open text-indigo-600 text-3xl mb-2"></i>
+                            <p class="font-semibold text-indigo-800">📚 Моя любимая сказка</p>
+                        </div>
+                        <div class="bg-teal-100 p-4 rounded-xl text-center theme-item">
+                            <i class="fas fa-home text-teal-600 text-3xl mb-2"></i>
+                            <p class="font-semibold text-teal-800">👨‍👩‍👧‍👦 Наш семейный бизнес</p>
+                        </div>
+                        <div class="bg-orange-100 p-4 rounded-xl text-center theme-item">
+                            <i class="fas fa-lightbulb text-orange-600 text-3xl mb-2"></i>
+                            <p class="font-semibold text-orange-800">🤩 Предложи свою тему!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Price section -->
+            <section class="mb-16">
+                <div class="bg-gradient-to-r from-pink-200 to-purple-200 rounded-3xl p-8 shadow-lg max-w-4xl mx-auto">
+                    <h2 class="text-2xl font-bold text-center text-purple-800 mb-6">Преподаватели курса</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="bg-white p-6 rounded-2xl shadow-md text-center card">
+                                  <img src="https://go.ideafilm.work/gf.jpg" alt="Генадий Фомин">                         
+                            <h3 class="text-xl font-bold text-blue-700 mb-2">Актёр театра и кино</h3>
+                            <p class="text-3xl font-bold text-blue-800 mb-4">Геннадий Фомин</p>
+                            <p class="text-gray-600">Сыграл десятки ролей в беларусском и француском кинематографе, преподает актёрское мастерство более 20 лет</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-md text-center card">
+                                    <img src="https://go.ideafilm.work/ip.jpeg" alt="Илья Панфилов">
+                            <h3 class="text-xl font-bold text-purple-700 mb-2">Кинооператор</h3>
+                            <p class="text-3xl font-bold text-purple-800 mb-4">Илья Панфилов</p>
+                            <p class="text-gray-600">Преподаёт по авторской методитеке разработанной совместно с оператором-постановщиком Всеволодом Симаковым</p>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                                <div class="bg-gradient-to-r from-pink-200 to-purple-200 rounded-3xl p-8 shadow-lg max-w-4xl mx-auto">
+                    <h2 class="text-2xl font-bold text-center text-purple-800 mb-6">Стоимость участия</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="bg-white p-6 rounded-2xl shadow-md text-center card">
+                            <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-ticket-alt text-blue-600 text-3xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-blue-700 mb-2">Разовое посещение (2,5 часа)</h3>
+                            <p class="text-3xl font-bold text-blue-800 mb-4">75 шекелей</p>
+                            <p class="text-gray-600">С 12:00 до 14:30 (перерыв с 13.15 до 13.30)</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-md text-center card">
+                            <div class="bg-purple-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-film text-purple-600 text-3xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-purple-700 mb-2">Полный интенсив (10 часов)</h3>
+                            <p class="text-3xl font-bold text-purple-800 mb-4">200 шекелей</p>
+                            <p class="text-gray-600">4 встречи + онлайн консультации</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- CTA section -->
+            <section class="mb-16">
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold text-purple-700 mb-6">Покажи всем свой мир - начни свой путь к успеху в кино!</h2>
+                    <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">Если хочешь узнать больше - приходи на интенсив и там всё очень просто и понятно расскажем даже для новичков</p>
+                    <div class="bg-green-100 p-6 rounded-2xl shadow-md max-w-2xl mx-auto card">
+                        <h3 class="text-2xl font-bold text-green-800 mb-4">Остались вопросы?</h3>
+                        <p class="text-lg text-gray-700 mb-4">Пиши и звони в WhatsApp и Telegram:</p>
+                        <a href="https://wa.me/972533037301" class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full text-lg transition duration-300 transform hover:scale-105">
+                            <i class="fab fa-whatsapp mr-2"></i> +972 53-303-7301
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="text-center py-8 text-gray-600">
+            <p>Книжный магазин "Маша и 3 медведя" HaNassi, 109, Haifa, Israel.</p>
 </html>
